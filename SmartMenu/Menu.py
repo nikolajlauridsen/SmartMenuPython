@@ -56,5 +56,9 @@ class Menu:
                         self.bindings.call_binding(f_id)
                     else:
                         print(self.out_of_bounds_msg)
+                        if self.clear:
+                            input()
                 else:
                     print(self.invalid_msg)
+                    if self.clear:
+                        input()
