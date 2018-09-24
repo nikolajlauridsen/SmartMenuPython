@@ -1,0 +1,6 @@
+My fancy menu!
+Press menu number or 0 to exit:
+Do This;this
+Do That;that
+Do Something;something
+Another option;another
