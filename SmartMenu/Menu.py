@@ -1,8 +1,10 @@
 
 class Menu:
-    def __init__(self, menu_path, bindings):
+    def __init__(self, menu_path, bindings, invalid_msg = "Invalid input, input a number", out_of_bounds_msg = "Selection not in menu"):
         self.title = None
         self.description = None
+        self.invalid_msg = invalid_msg
+        self.out_of_bounds_msg = out_of_bounds_msg
         self.commands = []
         self.load_menu(menu_path)
         self.bindings = bindings
@@ -11,8 +13,8 @@ class Menu:
         with open(menu_path, mode='r') as file:
             lines = file.readlines()
 
-            self.title = lines[0]
-            self.description = lines[1]
+            self.title = lines[0].strip('\n')
+            self.description = lines[1].strip('\n')
 
             for i in range(2, len(lines)):
                 split = lines[i].strip('\n').split(';')
@@ -35,6 +37,6 @@ class Menu:
                         f_id = self.commands[int(u_input)-1][1]
                         self.bindings.call_binding(f_id)
                     else:
-                        print('YOU WENT TOO FAR!! GO BACK!')
+                        print(self.out_of_bounds_msg)
                 else:
-                    print('Invalid input, input a number')
+                    print(self.invalid_msg)

@@ -24,5 +24,5 @@ def another():
     print('WORKS!')
 
 
-menu = Menu('menu.txt', bindings)
+menu = Menu('menu.txt', bindings, out_of_bounds_msg='YOU WENT TOO FAR!! GO BACK!')
 menu.run_menu()
