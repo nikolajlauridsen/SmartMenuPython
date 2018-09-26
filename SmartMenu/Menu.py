@@ -3,12 +3,14 @@ from .Utils import clear_screen
 
 class Menu:
     def __init__(self, menu_path, bindings, invalid_msg="Invalid input, input a number",
-                 out_of_bounds_msg="Selection not in menu", clear=True):
+                 out_of_bounds_msg="Selection not in menu", unbound_msg='Menu point unbound, select another option',
+                 clear=True):
 
         self.title = None
         self.description = None
         self.invalid_msg = invalid_msg
         self.out_of_bounds_msg = out_of_bounds_msg
+        self.unbound_msg = unbound_msg
         self.commands = []
         self.bindings = bindings
         self.clear = clear
@@ -53,7 +55,12 @@ class Menu:
                         # 'find' the id of the selected menu function
                         f_id = self.commands[int(u_input)-1][1]
                         # And execute it
-                        self.bindings.call_binding(f_id)
+                        try:
+                            self.bindings.call_binding(f_id)
+                        except KeyError:
+                            print(self.unbound_msg)
+                            if self.clear:
+                                input()
                     else:
                         print(self.out_of_bounds_msg)
                         if self.clear:
